@@ -1,0 +1,35 @@
+<div style="text-align:center">
+    <h1>ALQUILER DE LIBROS</h1>
+</div>
+
+<div class="example-container">
+    <form [formGroup]="loanForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input matInput formControlName="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha de alquiler</mat-label>
+            <input matInput [matDatepicker]="rental_date" formControlName="rental_date">
+            <mat-datepicker-toggle matSuffix [for]="rental_date"></mat-datepicker-toggle>
+            <mat-datepicker #rental_date></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha máxima de devolución</mat-label>
+            <input matInput [matDatepicker]="maximum_return_date" formControlName="maximum_return_date">
+            <mat-datepicker-toggle matSuffix [for]="maximum_return_date"></mat-datepicker-toggle>
+            <mat-datepicker #maximum_return_date></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre del libro</mat-label>
+            <mat-select formControlName="book_id">
+                <mat-option *ngFor="let book of books" [value]="book.id">
+                    {{book.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-button (click)="loanBook()" color="accent" [disabled]="loanForm.invalid">Alquilar</button>
+        <button mat-button color="warn" routerLink="/reservations">Ver Libros Alquilados</button>
+    </form>
+</div>

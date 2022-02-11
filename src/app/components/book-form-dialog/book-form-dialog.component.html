@@ -1,0 +1,79 @@
+<!-- Header when the user will create a new book -->
+<h1 *ngIf="!data.book" mat-dialog-title>Añadir un nuevo libro a la lista</h1>
+
+<!-- Header when the user will edit a book -->
+<h1 *ngIf="data.book" mat-dialog-title>Editar libro: {{data.book.name}}</h1>
+
+<!-- Book Form -->
+<div mat-dialog-content>
+    <form [formGroup]="bookForm">
+        <mat-grid-list cols="2" rowHeight="3:1">
+            <!-- Isbn code input -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Código ISBN</mat-label>
+                    <input matInput formControlName="isbn">
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's name input -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre del libro</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's editoral input -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Editorial</mat-label>
+                    <input matInput formControlName="editorial">
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's author input -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Autor del libro</mat-label>
+                    <input matInput formControlName="author">
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's genre input -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Género</mat-label>
+                    <input matInput formControlName="genre">
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's conservation status select -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Estado de Conservación</mat-label>
+                    <mat-select formControlName="conservation_status_id">
+                        <mat-option *ngFor="let conservationStatus of conservationStatuses" [value]="conservationStatus.id">
+                            {{conservationStatus.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- Book's state select -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Estado del libro</mat-label>
+                    <mat-select formControlName="state_id">
+                        <mat-option *ngFor="let state of states" [value]="state.id">
+                            {{state.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<!-- Actions buttons -->
+<div mat-dialog-actions>
+    <!-- Save new book -->
+    <button mat-button *ngIf="!data" (click)="saveNewBook()" color="accent" [disabled]="bookForm.invalid">Guardar</button>
+    <!-- Update book -->
+    <button mat-button mat-dialog-close *ngIf="data"  (click)="saveBook()" color="accent" [disabled]="bookForm.invalid">Actualizar</button>
+    <!-- Cancel action and close dialog -->
+    <button mat-button mat-dialog-close color="warn">Cancelar</button>
+</div>

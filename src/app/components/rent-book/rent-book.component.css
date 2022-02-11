@@ -1,0 +1,19 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 97%;
+    text-align: center;
+}
+
+.button1{
+    position: absolute;
+    left: 40%;
+    bottom: 10%;
+}
+
+.button2{
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+}

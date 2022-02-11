@@ -1,0 +1,42 @@
+<h1 style="text-align:center">Libros Prestados</h1>
+<div class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="loans">
+    
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let loan"> {{loan.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="book_id">
+      <th mat-header-cell *matHeaderCellDef> Libro </th>
+      <td mat-cell *matCellDef="let loan"> {{loan.book_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rental_date">
+      <th mat-header-cell *matHeaderCellDef> Fecha de alquiler </th>
+      <td mat-cell *matCellDef="let loan"> {{loan.rental_date | date: 'yyyy-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="maximum_return_date">
+      <th mat-header-cell *matHeaderCellDef> Fecha máxima de devolucion </th>
+      <td mat-cell *matCellDef="let loan"> {{loan.maximum_return_date | date: 'yyyy-MM-dd'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="return_date">
+      <th mat-header-cell *matHeaderCellDef> Fecha de devolcuion </th>
+      <td mat-cell *matCellDef="let loan"> {{loan.return_date | date: 'yyyy-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remove_action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let loan">
+        <button mat-button (click)="returnBook(loan)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
